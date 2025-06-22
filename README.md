@@ -1,73 +1,49 @@
-# Welcome to your Lovable project
+# 📜 Terms Sleuth
 
-## Project info
+**Understand Terms & Conditions in seconds, not hours.**
 
-**URL**: https://lovable.dev/projects/d8e699e1-e7b9-47ed-92c2-ca93c5c82187
+Terms Sleuth is an ⚡ AI-powered web application that helps users quickly summarize and understand long Terms & Conditions or Privacy Policy documents. Instead of scrolling through pages of legal text, users get a simple ✅ TL;DR summary and highlights of critical clauses, including data sharing, automatic renewals, refunds, user consent, and more.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+- 📝 Paste or upload T&C content (text input or file)
+- 🤖 AI-generated TL;DR summary
+- 🚨 Risky clauses highlighted with severity scores
+- 📚 Simplified explanations for legal language
+- 📊 Visual risk rating (1 to 10)
+- 🎨 Clean, modern UI with animations
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d8e699e1-e7b9-47ed-92c2-ca93c5c82187) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧠 How It Works
 
-**Use your preferred IDE**
+1. Users **paste or upload** a document.
+2. The content is processed using an integrated AI system.
+3. The response includes:
+   - ⚡ Concise summary (TL;DR)
+   - 🔍 Risky clauses + risk levels
+   - 🧾 Easy-to-read breakdowns
+4. Users get an **interactive, readable** overview of the document.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠 Tech Stack
 
-Follow these steps:
+- ⚛️ React + TypeScript
+- 🎨 Tailwind CSS
+- ☁️ Serverless AI integration
+- 🔥 Firebase Hosting (optional)
+- 🎞️ Lottie animations (optional)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🚀 Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+git clone https://github.com/ajashiatechnologies/terms-whisper-ai.git
+cd terms-sleuth
+npm install
 npm run dev
 ```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/d8e699e1-e7b9-47ed-92c2-ca93c5c82187) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
