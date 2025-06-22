@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Upload, FileText, Link, AlertTriangle, Shield, CheckCircle, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,16 +9,13 @@ import { Input } from '@/components/ui/input';
 import DocumentUpload from '@/components/DocumentUpload';
 import AnalysisResults from '@/components/AnalysisResults';
 import RiskScore from '@/components/RiskScore';
-
 const Index = () => {
   const [documentText, setDocumentText] = useState('');
   const [analysisResults, setAnalysisResults] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [uploadMethod, setUploadMethod] = useState('paste');
-
   const handleAnalyze = async () => {
     if (!documentText.trim()) return;
-    
     setIsAnalyzing(true);
     // Simulate AI analysis delay
     setTimeout(() => {
@@ -27,42 +23,33 @@ const Index = () => {
       const mockResults = {
         riskScore: 7,
         summary: "This privacy policy has several concerning clauses regarding data collection and sharing with third parties.",
-        redFlags: [
-          "Data shared with unlimited third parties",
-          "No clear data deletion policy",
-          "Automatic renewal with difficult cancellation"
-        ],
-        keyPoints: [
-          { 
-            category: "Data Collection", 
-            severity: "high", 
-            text: "Collects personal data, browsing history, and location data" 
-          },
-          { 
-            category: "Data Sharing", 
-            severity: "high", 
-            text: "May share data with third-party partners for marketing purposes" 
-          },
-          { 
-            category: "User Rights", 
-            severity: "medium", 
-            text: "Limited user control over data deletion and portability" 
-          }
-        ]
+        redFlags: ["Data shared with unlimited third parties", "No clear data deletion policy", "Automatic renewal with difficult cancellation"],
+        keyPoints: [{
+          category: "Data Collection",
+          severity: "high",
+          text: "Collects personal data, browsing history, and location data"
+        }, {
+          category: "Data Sharing",
+          severity: "high",
+          text: "May share data with third-party partners for marketing purposes"
+        }, {
+          category: "User Rights",
+          severity: "medium",
+          text: "Limited user control over data deletion and portability"
+        }]
       };
       setAnalysisResults(mockResults);
       setIsAnalyzing(false);
     }, 2000);
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="container mx-auto px-4 py-8">
+  return <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      <div className="container mx-auto px-4 py-8 bg-slate-800">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <Shield className="h-12 w-12 text-blue-400 mr-4" />
-            <h1 className="text-4xl font-bold text-white">PolicyLens</h1>
+            <h1 className="text-4xl font-bold text-white">Terms Sleuth
+          </h1>
           </div>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
             Understand what you're agreeing to with AI-powered analysis of Terms & Conditions and Privacy Policies
@@ -94,12 +81,7 @@ const Index = () => {
                   </TabsList>
                   
                   <TabsContent value="paste" className="space-y-4">
-                    <Textarea
-                      placeholder="Paste your Terms & Conditions or Privacy Policy here..."
-                      value={documentText}
-                      onChange={(e) => setDocumentText(e.target.value)}
-                      className="min-h-[300px] bg-white/10 border-white/20 text-white placeholder:text-slate-400 resize-none"
-                    />
+                    <Textarea placeholder="Paste your Terms & Conditions or Privacy Policy here..." value={documentText} onChange={e => setDocumentText(e.target.value)} className="min-h-[300px] bg-white/10 border-white/20 text-white placeholder:text-slate-400 resize-none" />
                   </TabsContent>
                   
                   <TabsContent value="upload" className="space-y-4">
@@ -107,10 +89,7 @@ const Index = () => {
                   </TabsContent>
                   
                   <TabsContent value="url" className="space-y-4">
-                    <Input
-                      placeholder="Enter URL to privacy policy or terms..."
-                      className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
-                    />
+                    <Input placeholder="Enter URL to privacy policy or terms..." className="bg-white/10 border-white/20 text-white placeholder:text-slate-400" />
                     <Button className="w-full bg-blue-600 hover:bg-blue-700">
                       <Link className="h-4 w-4 mr-2" />
                       Fetch Document
@@ -118,35 +97,24 @@ const Index = () => {
                   </TabsContent>
                 </Tabs>
 
-                <Button 
-                  onClick={handleAnalyze}
-                  disabled={!documentText.trim() || isAnalyzing}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3"
-                >
-                  {isAnalyzing ? (
-                    <>
+                <Button onClick={handleAnalyze} disabled={!documentText.trim() || isAnalyzing} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3">
+                  {isAnalyzing ? <>
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                       Analyzing Document...
-                    </>
-                  ) : (
-                    <>
+                    </> : <>
                       <Shield className="h-4 w-4 mr-2" />
                       Analyze Document
-                    </>
-                  )}
+                    </>}
                 </Button>
               </CardContent>
             </Card>
 
             {/* Results Section */}
             <div className="space-y-6">
-              {analysisResults ? (
-                <>
+              {analysisResults ? <>
                   <RiskScore score={analysisResults.riskScore} />
                   <AnalysisResults results={analysisResults} />
-                </>
-              ) : (
-                <Card className="bg-white/10 backdrop-blur-md border-white/20">
+                </> : <Card className="bg-white/10 backdrop-blur-md border-white/20">
                   <CardContent className="flex flex-col items-center justify-center py-12">
                     <Shield className="h-16 w-16 text-slate-400 mb-4" />
                     <h3 className="text-xl font-semibold text-white mb-2">Ready to Analyze</h3>
@@ -154,8 +122,7 @@ const Index = () => {
                       Upload or paste a document to get started with AI-powered analysis
                     </p>
                   </CardContent>
-                </Card>
-              )}
+                </Card>}
             </div>
           </div>
         </div>
@@ -187,8 +154,6 @@ const Index = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
