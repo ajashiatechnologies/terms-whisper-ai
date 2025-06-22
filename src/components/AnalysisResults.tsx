@@ -1,5 +1,5 @@
 
-import { AlertTriangle, Info, Shield, Eye, DollarSign, Users } from 'lucide-react';
+import { AlertTriangle, Info, Shield, Eye, DollarSign, Users, Brain } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -43,6 +43,35 @@ const AnalysisResults = ({ results }: AnalysisResultsProps) => {
     }
   };
 
+  // Generate AI-powered simplified explanations for risky clauses
+  const getSimplifiedExplanation = (category: string, severity: string, text: string) => {
+    const explanations = {
+      'data collection': {
+        high: "⚠️ This means the company can collect a lot of your personal information, including what you browse and where you are. This could be used to build a detailed profile about you.",
+        medium: "📊 The company collects some personal data but with reasonable limits. Your privacy has some protection.",
+        low: "✅ Minimal data collection with clear purposes. Your privacy is well protected."
+      },
+      'data sharing': {
+        high: "🚨 Your data can be shared with many other companies for marketing. You might get tons of ads and your info could end up anywhere.",
+        medium: "⚠️ Some data sharing with partners, but with certain restrictions. Your data has moderate protection.",
+        low: "✅ Very limited data sharing, only when necessary. Your data stays mostly private."
+      },
+      'payments': {
+        high: "💳 Be careful! This might automatically charge you or make cancellation very difficult. You could end up paying for things you don't want.",
+        medium: "💰 Some payment terms that require attention. Make sure you understand the billing cycle.",
+        low: "✅ Clear and fair payment terms with easy cancellation options."
+      },
+      'user rights': {
+        high: "🔒 You have very limited control over your data. It's hard to delete your information or get a copy of what they have.",
+        medium: "📝 You have some rights but the process might be complicated. You can request your data but it takes time.",
+        low: "✅ You have full control over your data with easy options to download or delete it."
+      }
+    };
+
+    const categoryKey = category.toLowerCase().replace(/\s+/g, ' ');
+    return explanations[categoryKey]?.[severity] || "📋 This clause requires careful review to understand its implications.";
+  };
+
   return (
     <div className="space-y-6">
       {/* Summary */}
@@ -78,7 +107,7 @@ const AnalysisResults = ({ results }: AnalysisResultsProps) => {
         </Card>
       )}
 
-      {/* Key Points */}
+      {/* Key Points with AI Explanations */}
       <Card className="bg-white/10 backdrop-blur-md border-white/20">
         <CardHeader>
           <CardTitle className="text-white flex items-center">
@@ -86,11 +115,13 @@ const AnalysisResults = ({ results }: AnalysisResultsProps) => {
             Key Points Analysis
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           {results.keyPoints.map((point, index) => {
             const IconComponent = getCategoryIcon(point.category);
+            const explanation = getSimplifiedExplanation(point.category, point.severity, point.text);
+            
             return (
-              <div key={index} className="space-y-2">
+              <div key={index} className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <IconComponent className="h-5 w-5 text-blue-400" />
@@ -103,7 +134,23 @@ const AnalysisResults = ({ results }: AnalysisResultsProps) => {
                     {point.severity.toUpperCase()}
                   </Badge>
                 </div>
+                
+                {/* Original clause text */}
                 <p className="text-slate-300 text-sm ml-7">{point.text}</p>
+                
+                {/* AI-powered simplified explanation */}
+                {(point.severity === 'medium' || point.severity === 'high') && (
+                  <div className="ml-7 bg-blue-400/10 rounded-lg p-3 border border-blue-400/20">
+                    <div className="flex items-start space-x-2">
+                      <Brain className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-xs font-medium text-blue-400 mb-1">AI Simplified</p>
+                        <p className="text-slate-300 text-sm">{explanation}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
                 {index < results.keyPoints.length - 1 && (
                   <Separator className="bg-white/10 mt-4" />
                 )}
